@@ -1,0 +1,13 @@
+img {
+  width: 140px;
+  position: relative;
+  transition: top 1s ease-in;
+}
+
+.hide {
+  top: 9rem;
+}
+
+.show {
+  top: 0rem;
+}
