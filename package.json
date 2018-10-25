@@ -5,8 +5,8 @@
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
-    "build": "parcel build index.html",
-    "sass": "sass --watch src/styles/scss:src/styles/css"
+    "build": "parcel build index.html --public-url ./",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {},
   "devDependencies": {
