@@ -176,53 +176,21 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/components/Footer.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Footer =
-/*#__PURE__*/
-function () {
-  function Footer() {
-    _classCallCheck(this, Footer);
-  }
-
-  _createClass(Footer, [{
-    key: "render",
-    value: function render() {
-      return "<p>Maxwell Kendall</p>";
-    }
-  }]);
-
-  return Footer;
-}();
-
-exports.default = Footer;
-},{}],"src/index.js":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 require("./styles/index.scss");
 
-var _Footer = _interopRequireDefault(require("./components/Footer"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var renderApp = function renderApp() {
-  return "<h1 class=\"test\">Hello Parcel!</h1>\n            <div>\n              Look\n              <a href=\"https://parceljs.org\" target=\"_blank\" rel=\"noopener noreferrer\">right nea baby</a>\n              for more info about Parcel.\n            </div>\n  ";
-};
-
-document.getElementById("app").innerHTML = renderApp();
-},{"./styles/index.scss":"src/styles/index.scss","./components/Footer":"src/components/Footer.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+document.querySelector('.start').addEventListener('click', function () {
+  console.log('add start function');
+});
+document.querySelector(".stop").addEventListener("click", function () {
+  console.log("add stop function");
+});
+document.querySelector(".reset").addEventListener("click", function () {
+  console.log("add reset function");
+});
+},{"./styles/index.scss":"src/styles/index.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -249,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54441" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54128" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
