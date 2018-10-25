@@ -1,4 +1,4 @@
-import './styles/index.scss';
+import './styles/scss/index.scss';
 
 document.querySelector('.start').addEventListener('click', () => {
   console.log('add start function')
