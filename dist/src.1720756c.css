@@ -1,0 +1,1 @@
+.main{flex-wrap:wrap;align-items:center;width:100%;min-height:100vh;padding:2rem 0}.hole,.main{display:flex;justify-content:center}.hole{width:25%;border:.25rem solid #8b4513;margin:3rem;border-radius:50%;overflow:hidden;background:#8b4513}img{width:140px;position:relative;transition:top 1s ease-in}.hide{top:9rem}.show{top:0}
