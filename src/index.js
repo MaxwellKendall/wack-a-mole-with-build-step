@@ -77,6 +77,7 @@ const startGame = () => {
     isGameOver = false;
     setGameClock();
     resetStats();
+    displayStats();
     showRandomHogAndSetRandomHideTimeout();
   }
 };
@@ -88,12 +89,14 @@ const endGame = (message = "Game Over!") => {
     hideAllHogs();
     displayGameOverMessage(message);
     resetStats();
+    displayStats();
   }
 };
 const resetGame = () => {
   clearTimeout(activeTimeout);
   endGame('Resetting your game...');
   resetStats();
+  displayStats();
   startGame();
 };
 const onHogWack = (hog) => {
