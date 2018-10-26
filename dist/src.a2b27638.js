@@ -268,6 +268,7 @@ var startGame = function startGame() {
     isGameOver = false;
     setGameClock();
     resetStats();
+    displayStats();
     showRandomHogAndSetRandomHideTimeout();
   }
 };
@@ -282,6 +283,7 @@ var endGame = function endGame() {
     hideAllHogs();
     displayGameOverMessage(message);
     resetStats();
+    displayStats();
   }
 };
 
@@ -289,6 +291,7 @@ var resetGame = function resetGame() {
   clearTimeout(activeTimeout);
   endGame('Resetting your game...');
   resetStats();
+  displayStats();
   startGame();
 };
 
@@ -336,7 +339,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58163" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59782" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
