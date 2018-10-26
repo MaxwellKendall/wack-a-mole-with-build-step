@@ -181,59 +181,134 @@ module.hot.accept(reloadCSS);
 
 require("./styles/scss/index.scss");
 
-// global variables
-var activeTimeout;
+var _this = void 0;
 
-var generateRandomNumber = function generateRandomNumber() {
-  return Math.floor(Math.random() * 3000);
-};
+// global variables
+var isGameOver = true;
+var score = 0;
+var numberOfHogs = 0;
+var gameClock;
+var activeTimeout; // ensurses a random number greater than 3/4 of a second
+
+var getRandomTimeoutDuration = function getRandomTimeoutDuration() {
+  var rtrn = Math.floor(Math.random() * 3500) + 750;
+  console.log('random time out duration is: ', rtrn);
+  return rtrn;
+}; // ensures a range between 9 and 1
+
 
 var generateRandomNumberBetween1and9 = function generateRandomNumberBetween1and9() {
   return Math.floor(Math.random() * 9) + 1;
-}; // random * high range of 10 minus 1, plus low range of 1
+};
 
+var resetStats = function resetStats() {
+  score = 0;
+  numberOfHogs = 0;
+}; // sets game duration
+
+
+var setGameClock = function setGameClock() {
+  gameClock = setTimeout(function () {
+    isGameOver = true;
+    hideAllHogs();
+    displayGameOverMessage();
+  }, 15000);
+};
+
+var hideAllHogs = function hideAllHogs() {
+  document.querySelectorAll('.hog').forEach(function (hog) {
+    hideHog(hog);
+  });
+}; // displays game stats
+
+
+var displayStats = function displayStats() {
+  document.getElementById('score').innerHTML = "You've wacked ".concat(score, " out of ").concat(numberOfHogs, " ground hogs!");
+}; // Functions for starting game
+
+
+var getRandomHog = function getRandomHog() {
+  return document.querySelector(".hog-".concat(generateRandomNumberBetween1and9()));
+};
+
+var showHog = function showHog(hog) {
+  numberOfHogs++;
+  displayStats();
+  hog.classList.contains('hide') ? hog.classList.remove('hide') : null;
+};
+
+var hideHog = function hideHog(hog) {
+  hog.classList.contains('hide') ? null : hog.classList.add('hide');
+};
+
+var hideHogAndSetNewHog = function hideHogAndSetNewHog(hog) {
+  console.log('hideHogAndSetNewHog: ', hog);
+  hideHog(hog);
+  showRandomHogAndSetRandomHideTimeout();
+};
+
+var showRandomHogAndSetRandomHideTimeout = function showRandomHogAndSetRandomHideTimeout() {
+  // if game is not over -- (A) show random hog, (B) set the random hide hog time out, (C) increment hog counter, (D) display new stats
+  if (!isGameOver) {
+    var hog = getRandomHog();
+    showHog(hog);
+    activeTimeout = setTimeout(hideHogAndSetNewHog.bind(_this, hog), getRandomTimeoutDuration());
+  }
+}; // functions for end a game
+
+
+var displayGameOverMessage = function displayGameOverMessage() {
+  var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Game Over!';
+  window.alert(message);
+}; // game controls
+
+
+var startGame = function startGame() {
+  if (isGameOver) {
+    isGameOver = false;
+    setGameClock();
+    resetStats();
+    showRandomHogAndSetRandomHideTimeout();
+  }
+};
 
 var endGame = function endGame() {
-  var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Game over!';
-  clearTimeout(activeTimeout);
-  activeTimeout = message;
-  document.querySelectorAll('.hole').forEach(function (hole) {
-    hole.children[0].classList.add('hide');
-  });
-  window.alert(message);
+  var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Game Over!";
+
+  if (!isGameOver) {
+    isGameOver = true;
+    clearTimeout(activeTimeout);
+    clearTimeout(gameClock);
+    hideAllHogs();
+    displayGameOverMessage(message);
+    resetStats();
+  }
 };
 
 var resetGame = function resetGame() {
-  endGame('resetting game!');
-  showRandomGroundHog();
+  clearTimeout(activeTimeout);
+  endGame('Resetting your game...');
+  resetStats();
+  startGame();
 };
 
-var hideHogAfterRandomDelay = function hideHogAfterRandomDelay(hog) {
-  activeTimeout = setTimeout(function () {
-    hog.classList.add('hide');
-    showRandomGroundHog();
-  }, generateRandomNumber());
-};
+var onHogWack = function onHogWack(hog) {
+  console.log('hog was clicked'); // clearTimeout(activeTimeout);
 
-var showRandomGroundHog = function showRandomGroundHog() {
-  var randomHog = document.querySelector(".hole-".concat(generateRandomNumberBetween1and9())).children[0];
-  randomHog.classList.remove('hide');
-  hideHogAfterRandomDelay(randomHog);
+  hideHog(hog);
+  score++;
+  displayStats();
 }; // Event listeners
 
 
-document.querySelector('.start').addEventListener('click', function () {
-  showRandomGroundHog();
-  window.setTimeout(endGame, 15000);
-});
-document.querySelector(".stop").addEventListener("click", function () {
-  console.log("add stop function");
-  endGame('Ending game...');
-});
-document.querySelector(".reset").addEventListener("click", function () {
-  console.log("add reset function");
-  resetGame();
-});
+document.querySelector('.start').addEventListener('click', startGame);
+document.querySelector(".stop").addEventListener("click", endGame.bind(void 0, 'Ending your game!'));
+document.querySelector(".reset").addEventListener("click", resetGame);
+document.querySelectorAll('img').forEach(function (hog) {
+  hog.addEventListener('click', onHogWack.bind(_this, hog));
+}); // Show score
+
+displayStats();
 },{"./styles/scss/index.scss":"src/styles/scss/index.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -261,7 +336,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55084" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58163" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

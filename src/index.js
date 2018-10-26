@@ -1,74 +1,114 @@
 import './styles/scss/index.scss';
 
 // global variables
-let activeTimeout;
-let gameClock;
-let isGameOver = false;
+let isGameOver = true;
 let score = 0;
 let numberOfHogs = 0;
+let gameClock;
+let activeTimeout;
 
-// utils
-const generateRandomNumber = () => Math.floor(Math.random() * 3000);
-const generateRandomNumberBetween1and9 = () => Math.floor(Math.random() * 9) + 1; // random * high range of 10 minus 1, plus low range of 1
+// ensurses a random number greater than 3/4 of a second
+const getRandomTimeoutDuration = () => {
+  const rtrn = Math.floor(Math.random() * 3500) + 750;
+  console.log('random time out duration is: ', rtrn);
+  return rtrn;
+}
+// ensures a range between 9 and 1
+const generateRandomNumberBetween1and9 = () => Math.floor(Math.random() * 9) + 1;
+const resetStats = () => {
+  score = 0;
+  numberOfHogs = 0;
+};
+// sets game duration
+const setGameClock = () => {
+  gameClock = setTimeout(() => {
+    isGameOver = true;
+    hideAllHogs();
+    displayGameOverMessage();
+  }, 15000);
+};
+
+const hideAllHogs = () => {
+  document.querySelectorAll('.hog').forEach((hog) => { hideHog(hog) });
+}
+
+// displays game stats
+const displayStats = () => {
+  document.getElementById('score').innerHTML = `You've wacked ${score} out of ${numberOfHogs} ground hogs!`;
+};
+
+// Functions for starting game
+  const getRandomHog = () => {
+    return document.querySelector(`.hog-${generateRandomNumberBetween1and9()}`);
+  }
+  const showHog = (hog) => {
+    numberOfHogs++;
+    displayStats();
+    hog.classList.contains('hide') ? hog.classList.remove('hide') : null;
+  }
+
+  const hideHog = (hog) => {
+    hog.classList.contains('hide') ? null : hog.classList.add('hide');
+  }
+
+  const hideHogAndSetNewHog = (hog) => {
+    console.log('hideHogAndSetNewHog: ', hog);
+    hideHog(hog);
+    showRandomHogAndSetRandomHideTimeout();
+  }
+
+  const showRandomHogAndSetRandomHideTimeout = () => {
+    // if game is not over -- (A) show random hog, (B) set the random hide hog time out, (C) increment hog counter, (D) display new stats
+    if (!isGameOver) {
+      const hog = getRandomHog();
+      showHog(hog);
+      activeTimeout = setTimeout(hideHogAndSetNewHog.bind(this, hog), getRandomTimeoutDuration());
+    }
+  };
+
+// functions for end a game
+  const displayGameOverMessage = (message = 'Game Over!') => {
+    window.alert(message);
+  }
 
 // game controls
-const endGame = (message = 'Game over!') => {
-  isGameOver = true;
-  clearTimeout(activeTimeout);
-  clearTimeout(gameClock);
-  document.querySelectorAll('.hole')
-    .forEach((hole) => {
-      hole.children[0].classList.add('hide');
-    });
-  window.alert(message);
-}
-
-const resetGame = () => {
-  endGame('resetting game!');
-  showRandomGroundHog();
-}
-
-const hideHogAfterRandomDelay = (hog) => {
-  activeTimeout = setTimeout(() => {
-    hog.classList.add('hide');
-    showRandomGroundHog();
-  }, generateRandomNumber())
-}
-
-const showRandomGroundHog = () => {
-  if (!isGameOver) {
-    const randomHog = document.querySelector(`.hole-${generateRandomNumberBetween1and9()}`).children[0];
-    randomHog.classList.remove('hide');
-    numberOfHogs ++;
-    hideHogAfterRandomDelay(randomHog);
+const startGame = () => {
+  if (isGameOver) {
+    isGameOver = false;
+    setGameClock();
+    resetStats();
+    showRandomHogAndSetRandomHideTimeout();
   }
-}
+};
+const endGame = (message = "Game Over!") => {
+  if (!isGameOver) {
+    isGameOver = true;
+    clearTimeout(activeTimeout);
+    clearTimeout(gameClock);
+    hideAllHogs();
+    displayGameOverMessage(message);
+    resetStats();
+  }
+};
+const resetGame = () => {
+  clearTimeout(activeTimeout);
+  endGame('Resetting your game...');
+  resetStats();
+  startGame();
+};
+const onHogWack = (hog) => {
+  console.log('hog was clicked');
+  // clearTimeout(activeTimeout);
+  hideHog(hog);
+  score++;
+  displayStats();
+};
 
 // Event listeners
-document.querySelector('.start').addEventListener('click', () => {
-  isGameOver = false;
-  showRandomGroundHog();
-  gameClock = window.setTimeout(endGame, 15000);
-});
+document.querySelector('.start').addEventListener('click', startGame);
+document.querySelector(".stop").addEventListener("click", endGame.bind(this, 'Ending your game!'));
+document.querySelector(".reset").addEventListener("click", resetGame)
+document.querySelectorAll('img').forEach((hog) => { hog.addEventListener('click', onHogWack.bind(this, hog)) });
 
-document.querySelector(".stop").addEventListener("click", () => {
-  console.log("add stop function");
-  endGame('Ending game...');
-});
-
-document.querySelector(".reset").addEventListener("click", () => {
-  console.log("add reset function");
-  resetGame();
-});
-
-document.querySelectorAll('img').forEach((hog) => {
-  hog.addEventListener('click', () => {
-    console.log('hog was clicked');
-    hog.classList.add('hide');
-    score ++;
-  })
-})
-
-const displayScore = () => {
-  document.getElementById("score").innerHTML = `SCORE: ${score} out of ${numberOfHogs}`;
-}
+// Show score
+displayStats();
