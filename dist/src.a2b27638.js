@@ -183,135 +183,138 @@ require("./styles/scss/index.scss");
 
 var _this = void 0;
 
-// global variables
-var isGameOver = true;
-var score = 0;
-var numberOfHogs = 0;
-var gameClock;
-var activeTimeout; // ensurses a random number greater than 3/4 of a second
+(function () {
+  // global variables (scoped within IIFE closure)
+  var isGameOver = true;
+  var score = 0;
+  var numberOfHogs = 0;
+  var gameClock;
+  var activeTimeout; // ensurses a random number greater than 3/4 of a second
 
-var getRandomTimeoutDuration = function getRandomTimeoutDuration() {
-  var rtrn = Math.floor(Math.random() * 3500) + 750;
-  console.log('random time out duration is: ', rtrn);
-  return rtrn;
-}; // ensures a range between 9 and 1
-
-
-var generateRandomNumberBetween1and9 = function generateRandomNumberBetween1and9() {
-  return Math.floor(Math.random() * 9) + 1;
-};
-
-var resetStats = function resetStats() {
-  score = 0;
-  numberOfHogs = 0;
-}; // sets game duration
+  var getRandomTimeoutDuration = function getRandomTimeoutDuration() {
+    var rtrn = Math.floor(Math.random() * 3500) + 750;
+    console.log('random time out duration is: ', rtrn);
+    return rtrn;
+  }; // ensures a range between 9 and 1
 
 
-var setGameClock = function setGameClock() {
-  gameClock = setTimeout(function () {
-    isGameOver = true;
-    hideAllHogs();
-    displayGameOverMessage();
-  }, 15000);
-};
+  var generateRandomNumberBetween1and9 = function generateRandomNumberBetween1and9() {
+    return Math.floor(Math.random() * 9) + 1;
+  };
 
-var hideAllHogs = function hideAllHogs() {
-  document.querySelectorAll('.hog').forEach(function (hog) {
+  var resetStats = function resetStats() {
+    score = 0;
+    numberOfHogs = 0;
+  }; // sets game duration
+
+
+  var setGameClock = function setGameClock() {
+    gameClock = setTimeout(function () {
+      isGameOver = true;
+      hideAllHogs();
+      displayGameOverMessage();
+    }, 15000);
+  };
+
+  var hideAllHogs = function hideAllHogs() {
+    document.querySelectorAll('.hog').forEach(function (hog) {
+      hideHog(hog);
+    });
+  }; // displays game stats
+
+
+  var displayStats = function displayStats() {
+    document.getElementById('js-score').innerHTML = "You've wacked ".concat(score, " out of ").concat(numberOfHogs, " ground hogs!");
+  }; // Functions for starting game
+
+
+  var getRandomHog = function getRandomHog() {
+    return document.querySelector(".hog-".concat(generateRandomNumberBetween1and9()));
+  };
+
+  var showHog = function showHog(hog) {
+    numberOfHogs++;
+    displayStats();
+    hog.classList.contains('hide') ? hog.classList.remove('hide') : null;
+  };
+
+  var hideHog = function hideHog(hog) {
+    hog.classList.contains('hide') ? null : hog.classList.add('hide');
+  };
+
+  var hideHogAndSetNewHog = function hideHogAndSetNewHog(hog) {
+    console.log('hideHogAndSetNewHog: ', hog);
     hideHog(hog);
-  });
-}; // displays game stats
-
-
-var displayStats = function displayStats() {
-  document.getElementById('score').innerHTML = "You've wacked ".concat(score, " out of ").concat(numberOfHogs, " ground hogs!");
-}; // Functions for starting game
-
-
-var getRandomHog = function getRandomHog() {
-  return document.querySelector(".hog-".concat(generateRandomNumberBetween1and9()));
-};
-
-var showHog = function showHog(hog) {
-  numberOfHogs++;
-  displayStats();
-  hog.classList.contains('hide') ? hog.classList.remove('hide') : null;
-};
-
-var hideHog = function hideHog(hog) {
-  hog.classList.contains('hide') ? null : hog.classList.add('hide');
-};
-
-var hideHogAndSetNewHog = function hideHogAndSetNewHog(hog) {
-  console.log('hideHogAndSetNewHog: ', hog);
-  hideHog(hog);
-  showRandomHogAndSetRandomHideTimeout();
-};
-
-var showRandomHogAndSetRandomHideTimeout = function showRandomHogAndSetRandomHideTimeout() {
-  // if game is not over -- (A) show random hog, (B) set the random hide hog time out, (C) increment hog counter, (D) display new stats
-  if (!isGameOver) {
-    var hog = getRandomHog();
-    showHog(hog);
-    activeTimeout = setTimeout(hideHogAndSetNewHog.bind(_this, hog), getRandomTimeoutDuration());
-  }
-}; // functions for end a game
-
-
-var displayGameOverMessage = function displayGameOverMessage() {
-  var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Game Over!';
-  window.alert(message);
-}; // game controls
-
-
-var startGame = function startGame() {
-  if (isGameOver) {
-    isGameOver = false;
-    setGameClock();
-    resetStats();
-    displayStats();
     showRandomHogAndSetRandomHideTimeout();
-  }
-};
+  };
 
-var endGame = function endGame() {
-  var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Game Over!";
+  var showRandomHogAndSetRandomHideTimeout = function showRandomHogAndSetRandomHideTimeout() {
+    // if game is not over -- (A) show random hog, (B) set the random hide hog time out, (C) increment hog counter, (D) display new stats
+    if (!isGameOver) {
+      var hog = getRandomHog();
+      showHog(hog);
+      activeTimeout = setTimeout(hideHogAndSetNewHog.bind(_this, hog), getRandomTimeoutDuration());
+    }
+  }; // functions for end a game
 
-  if (!isGameOver) {
-    isGameOver = true;
+
+  var displayGameOverMessage = function displayGameOverMessage() {
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Game Over!';
+    window.alert(message);
+  }; // game controls
+
+
+  var startGame = function startGame() {
+    if (isGameOver) {
+      isGameOver = false;
+      setGameClock();
+      resetStats();
+      displayStats();
+      showRandomHogAndSetRandomHideTimeout();
+    }
+  };
+
+  var endGame = function endGame() {
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Game Over!";
+
+    if (!isGameOver) {
+      isGameOver = true;
+      clearTimeout(activeTimeout);
+      clearTimeout(gameClock);
+      hideAllHogs();
+      displayGameOverMessage(message);
+      resetStats();
+      displayStats();
+    }
+  };
+
+  var resetGame = function resetGame() {
     clearTimeout(activeTimeout);
-    clearTimeout(gameClock);
-    hideAllHogs();
-    displayGameOverMessage(message);
+    endGame('Resetting your game...');
     resetStats();
     displayStats();
-  }
-};
+    startGame();
+  };
 
-var resetGame = function resetGame() {
-  clearTimeout(activeTimeout);
-  endGame('Resetting your game...');
-  resetStats();
-  displayStats();
-  startGame();
-};
-
-var onHogWack = function onHogWack(hog) {
-  console.log('hog was clicked'); // clearTimeout(activeTimeout);
-
-  hideHog(hog);
-  score++;
-  displayStats();
-}; // Event listeners
+  var onHogWack = function onHogWack(hog) {
+    console.log('hog was clicked');
+    hideHog(hog);
+    score++;
+    displayStats();
+  }; // Event listeners
 
 
-document.querySelector('.start').addEventListener('click', startGame);
-document.querySelector(".stop").addEventListener("click", endGame.bind(void 0, 'Ending your game!'));
-document.querySelector(".reset").addEventListener("click", resetGame);
-document.querySelectorAll('img').forEach(function (hog) {
-  hog.addEventListener('click', onHogWack.bind(_this, hog));
-}); // Show score
+  document.querySelector('.start').addEventListener('click', startGame);
+  document.querySelector(".stop").addEventListener("click", endGame.bind(_this, 'Ending your game!'));
+  document.querySelector(".reset").addEventListener("click", resetGame);
+  document.querySelectorAll('img').forEach(function (hog) {
+    hog.addEventListener('click', onHogWack.bind(_this, hog));
+  }); // Show score
 
-displayStats();
+  displayStats(); // display footer
+
+  document.getElementById("js-footer").innerHTML = "Maxwell Kendall &#169 ".concat(new Date().getFullYear());
+})();
 },{"./styles/scss/index.scss":"src/styles/scss/index.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -339,7 +342,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59782" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62052" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
