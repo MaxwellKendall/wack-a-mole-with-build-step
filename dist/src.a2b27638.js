@@ -217,8 +217,7 @@ var _this = void 0;
     var _difficultyLevelMap$g = difficultyLevelMap[getDifficultyLevel()],
         low = _difficultyLevelMap$g.low,
         high = _difficultyLevelMap$g.high;
-    var rtrn = Math.floor(Math.random() * high) + low;
-    return rtrn;
+    return Math.floor(Math.random() * high) + low;
   }; // ensures a range between 9 and 1
 
 
@@ -267,7 +266,6 @@ var _this = void 0;
   };
 
   var hidemoleAndSetNewmole = function hidemoleAndSetNewmole(mole) {
-    console.log('hidemoleAndSetNewmole: ', mole);
     hidemole(mole);
     showRandommoleAndSetRandomHideTimeout();
   };
@@ -299,6 +297,7 @@ var _this = void 0;
       setGameClock();
       resetStats();
       displayStats();
+      displayNotification('Starting a new game!');
       showRandommoleAndSetRandomHideTimeout();
     }
   };
@@ -325,8 +324,7 @@ var _this = void 0;
     startGame();
   };
 
-  var onmoleWack = function onmoleWack(mole) {
-    console.log('mole was clicked');
+  var onMoleWack = function onMoleWack(mole) {
     hidemole(mole);
     score++;
     displayStats();
@@ -337,7 +335,7 @@ var _this = void 0;
   document.querySelector(".stop").addEventListener("click", endGame.bind(_this, 'Ending your game!'));
   document.querySelector(".reset").addEventListener("click", resetGame);
   document.querySelectorAll('img').forEach(function (mole) {
-    mole.addEventListener('click', onmoleWack.bind(_this, mole));
+    mole.addEventListener('click', onMoleWack.bind(_this, mole));
   }); // Show score
 
   displayStats(); // display footer
