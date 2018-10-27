@@ -1,7 +1,7 @@
-@import './_vars.scss';
-@import './_mixins.scss';
-@import './_selectors.scss';
-@import './_header';
+@import './_vars';
+@import './_mixins';
+@import './_selectors';
+@import './_aside';
 @import './_footer';
 @import './_main';
 
@@ -13,4 +13,6 @@ body {
 
 #app {
   @include flex-box-center(column);
+  width: 85%;
+  margin: auto;
 }

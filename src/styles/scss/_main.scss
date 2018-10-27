@@ -2,63 +2,32 @@
 .main {
   @include flex-box-center(column);
   min-height: 65vh;
-  margin-top: $global-spacer;
   flex-wrap: wrap;
   width: 100%;
-  padding: 0;
-  // difficulty-level selector
-  label {
-    @include flex-box-center(row);
-    width: 60%;
-    text-transform: uppercase;
-    font-size: $regular-font;
-    font-weight: bold;
-    select {
-      @extend %light-box-shadow;
-      height: 3rem;
-      -webkit-appearance: none;
-      background: white;
-      border-color: $border-color;
-      margin-left: auto;
-      width: 80%;
-      text-indent: 1rem;
-      color: $text-color;
-      font-size: $regular-font;
-      &:focus {
-        border: none;
-        background: gainsboro;
-        outline: none;
-      }
-      &:hover {
-        cursor: pointer;
-      }
-    }
+  #score {
+    margin: 0;
+    padding: $global-spacer 0 0 0;
   }
-// Section where you click the mole
-  .moles {
+  section {
     @include flex-box-center(row);
-    flex-wrap: wrap;
     width: 100%;
-    section {
-      @include flex-box-center(row);
+  }
+  .hole {
+    @include flex-box-center(row);
+    width: 33%;
+    max-width: 250px;
+    border: 0.25rem solid saddlebrown;
+    margin: 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background: saddlebrown;
+    img {
+      width: 140px;
+      position: relative;
+      transition: cubic-bezier(0,1.76,.63,1.97);
     }
-    .hole {
-      @include flex-box-center(row);
-      width: 33%;
-      max-width: 250px;
-      border: 0.25rem solid saddlebrown;
-      margin: 1rem;
-      border-radius: 50%;
-      overflow: hidden;
-      background: saddlebrown;
-      img {
-        width: 140px;
-        position: relative;
-        transition: cubic-bezier(0,1.76,.63,1.97);
-      }
-      .hide {
-        top: 10rem;
-      }
+    .hide {
+      top: 10rem;
     }
   }
 }
