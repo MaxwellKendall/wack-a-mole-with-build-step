@@ -1,23 +1,50 @@
-.main label select, header button {
+aside button, aside label select {
   -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
   -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
 }
 
-header {
+aside {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
   min-height: 23vh;
+  width: 100%;
 }
-header h1 {
-  margin: 0;
-  padding: 2rem 0 0 0;
+aside label {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 2rem;
 }
-header button {
+aside label select {
+  height: 3rem;
+  -webkit-appearance: none;
+  background: white;
+  border-color: #d9d9d9;
+  margin-left: auto;
   width: 75%;
+  text-indent: 1rem;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 20px;
+}
+aside label select:focus {
+  border: none;
+  background: gainsboro;
+  outline: none;
+}
+aside label select:hover {
+  cursor: pointer;
+}
+aside button {
+  width: 100%;
   margin: 0.25rem;
   cursor: pointer;
   height: 5rem;
@@ -30,52 +57,11 @@ header button {
   text-transform: uppercase;
   font-weight: normal;
 }
-header button:hover {
+aside button:hover {
   border-color: #40a9ff;
   font-weight: bold;
   color: #40a9ff;
 }
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 65vh;
-  margin-top: 2rem;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 0;
-}
-.main label {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-  text-transform: uppercase;
-  font-size: 20px;
-  font-weight: bold;
-}
-.main label select {
-  height: 3rem;
-  -webkit-appearance: none;
-  background: white;
-  border-color: #d9d9d9;
-  margin-left: auto;
-  width: 80%;
-  text-indent: 1rem;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 20px;
-}
-.main label select:focus {
-  border: none;
-  background: gainsboro;
-  outline: none;
-}
-.main label select:hover {
-  cursor: pointer;
-}
-
 footer {
   display: flex;
   flex-direction: column;
@@ -89,21 +75,27 @@ footer {
   text-transform: uppercase;
 }
 
-.moles {
+.main {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 65vh;
   flex-wrap: wrap;
   width: 100%;
 }
-.moles section {
+.main #score {
+  margin: 0;
+  padding: 2rem 0 0 0;
+}
+.main section {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
-.moles .hole {
+.main .hole {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -116,12 +108,12 @@ footer {
   overflow: hidden;
   background: saddlebrown;
 }
-.moles .hole img {
+.main .hole img {
   width: 140px;
   position: relative;
   transition: cubic-bezier(0, 1.76, 0.63, 1.97);
 }
-.moles .hole .hide {
+.main .hole .hide {
   top: 10rem;
 }
 
@@ -136,4 +128,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 85%;
+  margin: auto;
 }
