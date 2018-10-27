@@ -4,6 +4,12 @@ header .game-controls button, header label select {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
 }
 
+.notification, header .game-controls button, header label select {
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -28,12 +34,9 @@ header label {
 header label select {
   height: 3rem;
   -webkit-appearance: none;
-  background: white;
-  border-color: #d9d9d9;
   margin-left: auto;
   width: 75%;
   text-indent: 1rem;
-  color: rgba(0, 0, 0, 0.65);
   font-size: 20px;
 }
 header label select:focus {
@@ -55,16 +58,13 @@ header .game-controls {
   }
 }
 header .game-controls button {
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   width: 100%;
   margin: 0.25rem;
   cursor: pointer;
   height: 5rem;
   border-radius: 4px;
   font-size: 20px;
-  color: rgba(0, 0, 0, 0.65);
-  background-color: #fff;
-  border-color: #d9d9d9;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   text-transform: uppercase;
   font-weight: normal;
 }
@@ -73,6 +73,25 @@ header .game-controls button:hover {
   font-weight: bold;
   color: #40a9ff;
 }
+.notification {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  font-size: 20px;
+  padding: 2rem;
+  position: fixed;
+  top: -6rem;
+  width: 100%;
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
+body #app .notification__open {
+  top: -0.25rem;
+}
+
 footer {
   display: flex;
   flex-direction: column;

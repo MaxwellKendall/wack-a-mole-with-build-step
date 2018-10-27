@@ -236,7 +236,7 @@ var _this = void 0;
     gameClock = setTimeout(function () {
       isGameOver = true;
       hideAllHogs();
-      displayGameOverMessage();
+      displayNotification();
     }, 15000);
   };
 
@@ -282,9 +282,14 @@ var _this = void 0;
   }; // functions for end a game
 
 
-  var displayGameOverMessage = function displayGameOverMessage() {
+  var displayNotification = function displayNotification() {
     var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Game Over!';
-    window.alert(message);
+    var gameNotification = document.getElementById('js-game-notification');
+    gameNotification.classList.add('notification__open');
+    gameNotification.innerHTML = message;
+    setTimeout(function () {
+      gameNotification.classList.remove('notification__open');
+    }, 1500);
   }; // game controls
 
 
@@ -306,7 +311,7 @@ var _this = void 0;
       clearTimeout(activeTimeout);
       clearTimeout(gameClock);
       hideAllHogs();
-      displayGameOverMessage(message);
+      displayNotification(message);
       resetStats();
       displayStats();
     }
