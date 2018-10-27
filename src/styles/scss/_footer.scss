@@ -1,0 +1,9 @@
+footer {
+  @include flex-box-center(column);
+  min-height: 10vh;
+  padding: $global-spacer;
+  width: 100%;
+  margin: 0;
+  font-size: $regular-font;
+  text-transform: uppercase;
+}
