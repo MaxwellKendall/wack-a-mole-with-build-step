@@ -1,19 +1,20 @@
-aside button, aside label select {
+header .game-controls button, header label select {
   -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
   -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
 }
 
-aside {
+header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+  flex-wrap: wrap;
   min-height: 23vh;
   width: 100%;
 }
-aside label {
+header label {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -24,7 +25,7 @@ aside label {
   font-weight: bold;
   margin-bottom: 2rem;
 }
-aside label select {
+header label select {
   height: 3rem;
   -webkit-appearance: none;
   background: white;
@@ -35,15 +36,25 @@ aside label select {
   color: rgba(0, 0, 0, 0.65);
   font-size: 20px;
 }
-aside label select:focus {
+header label select:focus {
   border: none;
   background: gainsboro;
   outline: none;
 }
-aside label select:hover {
+header label select:hover {
   cursor: pointer;
 }
-aside button {
+header .game-controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  header .game-controls {
+    flex-direction: row;
+  }
+}
+header .game-controls button {
   width: 100%;
   margin: 0.25rem;
   cursor: pointer;
@@ -57,7 +68,7 @@ aside button {
   text-transform: uppercase;
   font-weight: normal;
 }
-aside button:hover {
+header .game-controls button:hover {
   border-color: #40a9ff;
   font-weight: bold;
   color: #40a9ff;
@@ -103,15 +114,25 @@ footer {
   width: 33%;
   max-width: 250px;
   border: 0.25rem solid saddlebrown;
-  margin: 1rem;
+  margin: 0.25rem;
   border-radius: 50%;
   overflow: hidden;
   background: saddlebrown;
 }
+@media (min-width: 768px) {
+  .main .hole {
+    margin: 1rem;
+  }
+}
 .main .hole img {
-  width: 140px;
+  width: 120px;
   position: relative;
   transition: cubic-bezier(0, 1.76, 0.63, 1.97);
+}
+@media (min-width: 768px) {
+  .main .hole img {
+    width: 140px;
+  }
 }
 .main .hole .hide {
   top: 10rem;
