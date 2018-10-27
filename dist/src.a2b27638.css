@@ -1,0 +1,139 @@
+.main label select, header button {
+  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  min-height: 23vh;
+}
+header h1 {
+  margin: 0;
+  padding: 2rem 0 0 0;
+}
+header button {
+  width: 75%;
+  margin: 0.25rem;
+  cursor: pointer;
+  height: 5rem;
+  border-radius: 4px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  border-color: #d9d9d9;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  text-transform: uppercase;
+  font-weight: normal;
+}
+header button:hover {
+  border-color: #40a9ff;
+  font-weight: bold;
+  color: #40a9ff;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 65vh;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0;
+}
+.main label {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+}
+.main label select {
+  height: 3rem;
+  -webkit-appearance: none;
+  background: white;
+  border-color: #d9d9d9;
+  margin-left: auto;
+  width: 80%;
+  text-indent: 1rem;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 20px;
+}
+.main label select:focus {
+  border: none;
+  background: gainsboro;
+  outline: none;
+}
+.main label select:hover {
+  cursor: pointer;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+  padding: 2rem;
+  width: 100%;
+  margin: 0;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.moles {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.moles section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.moles .hole {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+  max-width: 250px;
+  border: 0.25rem solid saddlebrown;
+  margin: 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: saddlebrown;
+}
+.moles .hole img {
+  width: 140px;
+  position: relative;
+  transition: cubic-bezier(0, 1.76, 0.63, 1.97);
+}
+.moles .hole .hide {
+  top: 10rem;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
