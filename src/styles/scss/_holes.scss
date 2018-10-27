@@ -1,12 +1,11 @@
 .moles {
-  display: flex;
+  @include flex-box-center(row);
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
   .hole {
+    @include flex-box-center(row);
     width: 25%;
-    display: flex;
-    justify-content: center;
+    min-width: 25%;
+    max-width: 250px;
     border: 0.25rem solid saddlebrown;
     margin: 1rem;
     border-radius: 50%;

@@ -7,7 +7,7 @@ import './styles/scss/index.scss';
   let numberOfHogs = 0;
   let gameClock;
   let activeTimeout;
-  const difficultyLevelMap = { easy: { high: 3500, low: 400 }, moderate: { high: 2000, low: 400 }, difficult: {high: 1000, low: 400 }, legendary: { high: 850, low: 100 }};
+  const difficultyLevelMap = { 0: { high: 3500, low: 400 }, 1: { high: 2000, low: 400 }, 2: {high: 1000, low: 400 }, 3: { high: 850, low: 100 }};
 
   const getDifficultyLevel = () => document.getElementById('difficulty').value;
   
