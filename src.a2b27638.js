@@ -187,7 +187,7 @@ var _this = void 0;
   // global variables (scoped within IIFE closure)
   var isGameOver = true;
   var score = 0;
-  var numberOfHogs = 0;
+  var numberOfmoles = 0;
   var gameClock;
   var activeTimeout;
   var difficultyLevelMap = {
@@ -228,56 +228,56 @@ var _this = void 0;
 
   var resetStats = function resetStats() {
     score = 0;
-    numberOfHogs = 0;
+    numberOfmoles = 0;
   }; // sets game duration
 
 
   var setGameClock = function setGameClock() {
     gameClock = setTimeout(function () {
       isGameOver = true;
-      hideAllHogs();
+      hideAllmoles();
       displayNotification();
     }, 15000);
   };
 
-  var hideAllHogs = function hideAllHogs() {
-    document.querySelectorAll('.hog').forEach(function (hog) {
-      hideHog(hog);
+  var hideAllmoles = function hideAllmoles() {
+    document.querySelectorAll('.mole').forEach(function (mole) {
+      hidemole(mole);
     });
   }; // displays game stats
 
 
   var displayStats = function displayStats() {
-    document.getElementById('js-score').innerHTML = "You've wacked ".concat(score, " out of ").concat(numberOfHogs, " ground hogs!");
+    document.getElementById('js-score').innerHTML = "You've whacked ".concat(score, " out of ").concat(numberOfmoles, " moles!");
   }; // Functions for starting game
 
 
-  var getRandomHog = function getRandomHog() {
-    return document.querySelector(".hog-".concat(generateRandomNumberBetween1and9()));
+  var getRandommole = function getRandommole() {
+    return document.querySelector(".mole-".concat(generateRandomNumberBetween1and9()));
   };
 
-  var showHog = function showHog(hog) {
-    numberOfHogs++;
+  var showmole = function showmole(mole) {
+    numberOfmoles++;
     displayStats();
-    hog.classList.contains('hide') ? hog.classList.remove('hide') : null;
+    mole.classList.contains('hide') ? mole.classList.remove('hide') : null;
   };
 
-  var hideHog = function hideHog(hog) {
-    hog.classList.contains('hide') ? null : hog.classList.add('hide');
+  var hidemole = function hidemole(mole) {
+    mole.classList.contains('hide') ? null : mole.classList.add('hide');
   };
 
-  var hideHogAndSetNewHog = function hideHogAndSetNewHog(hog) {
-    console.log('hideHogAndSetNewHog: ', hog);
-    hideHog(hog);
-    showRandomHogAndSetRandomHideTimeout();
+  var hidemoleAndSetNewmole = function hidemoleAndSetNewmole(mole) {
+    console.log('hidemoleAndSetNewmole: ', mole);
+    hidemole(mole);
+    showRandommoleAndSetRandomHideTimeout();
   };
 
-  var showRandomHogAndSetRandomHideTimeout = function showRandomHogAndSetRandomHideTimeout() {
-    // if game is not over -- (A) show random hog, (B) set the random hide hog time out, (C) increment hog counter, (D) display new stats
+  var showRandommoleAndSetRandomHideTimeout = function showRandommoleAndSetRandomHideTimeout() {
+    // if game is not over -- (A) show random mole, (B) set the random hide mole time out, (C) increment mole counter, (D) display new stats
     if (!isGameOver) {
-      var hog = getRandomHog();
-      showHog(hog);
-      activeTimeout = setTimeout(hideHogAndSetNewHog.bind(_this, hog), getRandomTimeoutDuration());
+      var mole = getRandommole();
+      showmole(mole);
+      activeTimeout = setTimeout(hidemoleAndSetNewmole.bind(_this, mole), getRandomTimeoutDuration());
     }
   }; // functions for end a game
 
@@ -299,7 +299,7 @@ var _this = void 0;
       setGameClock();
       resetStats();
       displayStats();
-      showRandomHogAndSetRandomHideTimeout();
+      showRandommoleAndSetRandomHideTimeout();
     }
   };
 
@@ -310,7 +310,7 @@ var _this = void 0;
       isGameOver = true;
       clearTimeout(activeTimeout);
       clearTimeout(gameClock);
-      hideAllHogs();
+      hideAllmoles();
       displayNotification(message);
       resetStats();
       displayStats();
@@ -325,9 +325,9 @@ var _this = void 0;
     startGame();
   };
 
-  var onHogWack = function onHogWack(hog) {
-    console.log('hog was clicked');
-    hideHog(hog);
+  var onmoleWack = function onmoleWack(mole) {
+    console.log('mole was clicked');
+    hidemole(mole);
     score++;
     displayStats();
   }; // Event listeners
@@ -336,8 +336,8 @@ var _this = void 0;
   document.querySelector('.start').addEventListener('click', startGame);
   document.querySelector(".stop").addEventListener("click", endGame.bind(_this, 'Ending your game!'));
   document.querySelector(".reset").addEventListener("click", resetGame);
-  document.querySelectorAll('img').forEach(function (hog) {
-    hog.addEventListener('click', onHogWack.bind(_this, hog));
+  document.querySelectorAll('img').forEach(function (mole) {
+    mole.addEventListener('click', onmoleWack.bind(_this, mole));
   }); // Show score
 
   displayStats(); // display footer
