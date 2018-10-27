@@ -1,19 +1,19 @@
-<html>
+<html lang="en">
 <head>
 	<title>Wack a Mole by Maxwell Kendall</title>
 	<meta charset="UTF-8" />
 </head>
 <body>
-	<div id="app">
-		<span id="js-game-notification" class="notification"></span>
-		<header>
-			<label for="difficulty">Difficulty Level
-				<select name="difficulty-level" id="difficulty">
-					<option value="0" selected disabled hidden>Select Difficulty Level</option>
-					<option value="0">Easy</option>
-					<option value="1">Moderate</option>
-					<option value="2">Difficult</option>
-					<option value="3">Legendary</option>
+	<div id="app" role="main">
+		<span id="js-game-notification" class="notification" role="complementary"></span>
+		<header role="navigation">
+			<label tab-index="0" for="difficulty">Difficulty Level
+				<select tab-index="0" name="difficulty-level" id="difficulty">
+					<option tab-index="0" value="0" selected disabled hidden>Select Difficulty Level</option>
+					<option tab-index="0" value="0">Easy</option>
+					<option tab-index="0" value="1">Moderate</option>
+					<option tab-index="0" value="2">Difficult</option>
+					<option tab-index="0" value="3">Legendary</option>
 				</select>
 			</label>
 			<div class="game-controls">

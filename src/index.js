@@ -13,8 +13,7 @@ import './styles/scss/index.scss';
   
   const getRandomTimeoutDuration = () => {
     const { low, high } = difficultyLevelMap[getDifficultyLevel()];
-    const rtrn = Math.floor(Math.random() * high) + low;
-    return rtrn;
+    return Math.floor(Math.random() * high) + low;
   }
   
   // ensures a range between 9 and 1
@@ -56,7 +55,6 @@ import './styles/scss/index.scss';
   }
 
   const hidemoleAndSetNewmole = (mole) => {
-    console.log('hidemoleAndSetNewmole: ', mole);
     hidemole(mole);
     showRandommoleAndSetRandomHideTimeout();
   }
@@ -87,6 +85,7 @@ import './styles/scss/index.scss';
       setGameClock();
       resetStats();
       displayStats();
+      displayNotification('Starting a new game!');
       showRandommoleAndSetRandomHideTimeout();
     }
   };
@@ -101,6 +100,7 @@ import './styles/scss/index.scss';
       displayStats();
     }
   };
+
   const resetGame = () => {
     clearTimeout(activeTimeout);
     endGame('Resetting your game...');
@@ -108,8 +108,7 @@ import './styles/scss/index.scss';
     displayStats();
     startGame();
   };
-  const onmoleWack = (mole) => {
-    console.log('mole was clicked');
+  const onMoleWack = (mole) => {
     hidemole(mole);
     score++;
     displayStats();
@@ -119,10 +118,11 @@ import './styles/scss/index.scss';
   document.querySelector('.start').addEventListener('click', startGame);
   document.querySelector(".stop").addEventListener("click", endGame.bind(this, 'Ending your game!'));
   document.querySelector(".reset").addEventListener("click", resetGame)
-  document.querySelectorAll('img').forEach((mole) => { mole.addEventListener('click', onmoleWack.bind(this, mole)) });
+  document.querySelectorAll('img').forEach((mole) => { mole.addEventListener('click', onMoleWack.bind(this, mole)) });
 
   // Show score
   displayStats();
+  
   // display footer
   document.getElementById("js-footer").innerHTML = `Maxwell Kendall &#169 ${new Date().getFullYear()}`;
 })();
