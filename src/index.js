@@ -1,4 +1,5 @@
 import './styles/scss/index.scss';
+
 (() => {
   // global variables (scoped within IIFE closure)
   let isGameOver = true;
@@ -6,13 +7,16 @@ import './styles/scss/index.scss';
   let numberOfHogs = 0;
   let gameClock;
   let activeTimeout;
+  const difficultyLevelMap = { 0: { high: 3500, low: 400 }, 1: { high: 2000, low: 400 }, 2: {high: 1000, low: 400 }, 3: { high: 850, low: 100 }};
 
-  // ensurses a random number greater than 3/4 of a second
+  const getDifficultyLevel = () => document.getElementById('difficulty').value;
+  
   const getRandomTimeoutDuration = () => {
-    const rtrn = Math.floor(Math.random() * 3500) + 750;
-    console.log('random time out duration is: ', rtrn);
+    const { low, high } = difficultyLevelMap[getDifficultyLevel()];
+    const rtrn = Math.floor(Math.random() * high) + low;
     return rtrn;
   }
+  
   // ensures a range between 9 and 1
   const generateRandomNumberBetween1and9 = () => Math.floor(Math.random() * 9) + 1;
   const resetStats = () => {

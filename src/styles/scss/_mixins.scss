@@ -1,0 +1,21 @@
+@mixin flex-box-center($direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin bp($point) {
+  @if $point == $mobile {
+    @media (max-width: $mobile ) { @content; }
+  }
+  @if $point == $tablet {
+    @media (max-width: $tablet ) { @content; }
+  }
+  @if $point == $desktop {
+    @media (max-width: $desktop ) { @content; }
+  }
+  @if $point == $monitor {
+    @media (max-width: $monitor ) { @content; }
+  }
+}

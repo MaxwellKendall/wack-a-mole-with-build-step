@@ -5,34 +5,29 @@ body {
 }
 
 #app {
-  display: flex;
-  flex-direction: column;
+  @include flex-box-center(column);
 }
 
 header {
-  display: flex;
-  margin-top: 2vh;
-  flex-direction: column;
-  align-items: center;
+  @include flex-box-center(column);
+  margin-top: $global-spacer;
   min-height: 23vh;
   h1 {
     margin: 0;
-    padding: 2rem 0 0 0;
+    padding: $global-spacer 0 0 0;
   }
   button {
+    @extend %light-box-shadow;
     width: 75%;
-    margin: .25rem;
+    margin: $global-spacer / 8;
     cursor: pointer;
     height: 5rem;
     border-radius: 4px;
-    font-size: 20px;
-    color: rgba(0, 0, 0, 0.65);
+    font-size: $regular-font;
+    color: $text-color;
     background-color: #fff;
-    border-color: #d9d9d9;
+    border-color: $border-color;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
-    -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
     text-transform: uppercase;
     font-weight: normal;
     &:hover {
@@ -53,23 +48,48 @@ header {
 }
 
 .main {
+  @include flex-box-center(column);
   min-height: 65vh;
-  display: flex;
+  margin-top: $global-spacer;
   flex-wrap: wrap;
-  align-items: center;
   width: 100%;
-  justify-content: center;
   padding: 0;
+
+  label {
+    @include flex-box-center(row);
+    width: 60%;
+    text-transform: uppercase;
+    font-size: $regular-font;
+    font-weight: bold;
+    select {
+      @extend %light-box-shadow;
+      height: 3rem;
+      -webkit-appearance: none;
+      background: white;
+      border-color: $border-color;
+      margin-left: auto;
+      width: 80%;
+      text-indent: 1rem;
+      color: $text-color;
+      font-size: $regular-font;
+      &:focus {
+        border: none;
+        background: gainsboro;
+        outline: none;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 footer {
+  @include flex-box-center(column);
   min-height: 10vh;
-  padding: 1rem;
+  padding: $global-spacer;
   width: 100%;
   margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
+  font-size: $regular-font;
   text-transform: uppercase;
 }

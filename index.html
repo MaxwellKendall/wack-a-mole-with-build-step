@@ -13,33 +13,44 @@
 		</header>
 		<!-- Not using the HTML5 main element due to only partial support in IE11 -->
 		<div class="main">
-			<section class="hole hole-1">
-				<img class="hog hog-1 hide" src="./src/img/groundhog.svg" alt="picture of ground hog">
-			</section>
-			<section class="hole hole-2">
-				<img class="hog hog-2 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
-			</section>
-			<section class="hole hole-3">
-				<img class="hog hog-3 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
-			</section>
-			<section class="hole hole-4">
-				<img class="hog hog-4 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
-			</section>
-			<section class="hole hole-5">
-				<img class="hog hog-5 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
-			</section>
-			<section class="hole hole-6">
-				<img class="hog hog-6 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
-			</section>
-			<section class="hole hole-7">
-				<img class="hog hog-7 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
-			</section>
-			<section class="hole hole-8">
-				<img class="hog hog-8 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
-			</section>
-			<section class="hole hole-9">
-				<img class="hog hog-9 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
-			</section>
+			<label for="difficulty">Difficulty Level
+				<select name="difficulty-level" id="difficulty">
+					<option value="0" selected disabled hidden>Select Difficulty Level</option>
+					<option value="0">Easy</option>
+					<option value="1">Moderate</option>
+					<option value="2">Difficult</option>
+					<option value="3">Legendary</option>
+				</select>
+			</label>
+			<div class="moles">
+				<section class="hole hole-1">
+					<img class="hog hog-1 hide" src="./src/img/groundhog.svg" alt="picture of ground hog">
+				</section>
+				<section class="hole hole-2">
+					<img class="hog hog-2 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
+				</section>
+				<section class="hole hole-3">
+					<img class="hog hog-3 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
+				</section>
+				<section class="hole hole-4">
+					<img class="hog hog-4 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
+				</section>
+				<section class="hole hole-5">
+					<img class="hog hog-5 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
+				</section>
+				<section class="hole hole-6">
+					<img class="hog hog-6 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
+				</section>
+				<section class="hole hole-7">
+					<img class="hog hog-7 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
+				</section>
+				<section class="hole hole-8">
+					<img class="hog hog-8 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
+				</section>
+				<section class="hole hole-9">
+					<img class="hog hog-9 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
+				</section>
+			</div>
 		</div>
 		<footer>
 			<p id="js-footer"></p> 
