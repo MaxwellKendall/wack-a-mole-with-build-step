@@ -1,6 +1,16 @@
 @import './_vars.scss';
 @import './_mixins.scss';
 @import './_selectors.scss';
+@import './_header';
 @import './_main';
-@import './_holes';
 @import './_moles';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+  @include flex-box-center(column);
+}
