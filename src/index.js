@@ -28,7 +28,7 @@ import './styles/scss/index.scss';
     gameClock = setTimeout(() => {
       isGameOver = true;
       hideAllHogs();
-      displayGameOverMessage();
+      displayNotification();
     }, 15000);
   };
 
@@ -71,8 +71,13 @@ import './styles/scss/index.scss';
   };
 
   // functions for end a game
-  const displayGameOverMessage = (message = 'Game Over!') => {
-    window.alert(message);
+  const displayNotification = (message = 'Game Over!') => {
+    const gameNotification = document.getElementById('js-game-notification');
+    gameNotification.classList.add('notification__open');
+    gameNotification.innerHTML = message;
+    setTimeout(() => {
+      gameNotification.classList.remove('notification__open');
+    }, 1500);
   }
 
   // game controls
@@ -91,7 +96,7 @@ import './styles/scss/index.scss';
       clearTimeout(activeTimeout);
       clearTimeout(gameClock);
       hideAllHogs();
-      displayGameOverMessage(message);
+      displayNotification(message);
       resetStats();
       displayStats();
     }

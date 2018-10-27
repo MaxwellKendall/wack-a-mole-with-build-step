@@ -1,0 +1,16 @@
+.notification {
+  @include flex-box-center(row);
+  @include smoothTransition(all, 1s);
+  @extend %background-styles;
+  font-size: $regular-font;
+  padding: $global-spacer;
+  position: fixed;
+  top: -6rem;
+  width: 100%;
+  border-radius: .25rem;
+  width: 100%;
+}
+
+body #app .notification__open {
+  top: -0.25rem;
+}

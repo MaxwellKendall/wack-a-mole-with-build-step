@@ -19,3 +19,7 @@
     @media (min-width: $monitor ) { @content; }
   }
 }
+
+@mixin smoothTransition($prop, $timing) {
+    transition: $prop $timing cubic-bezier(0.645, 0.045, 0.355, 1);
+}
