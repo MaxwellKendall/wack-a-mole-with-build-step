@@ -2,6 +2,9 @@
 <head>
 	<title>Parcel Sandbox</title>
 	<meta charset="UTF-8" />
+	<script>
+		window.date = new Date().getFullYear();
+	</script>
 </head>
 <body>
 	<div id="app">
@@ -9,9 +12,10 @@
 			<button class="start">Start</button>
 			<button class="stop">Stop</button>
 			<button class="reset">Reset</button>
-			<h1 id="score"></h1>
+			<h1 id="js-score"></h1>
 		</header>
-		<main class="main">
+		<!-- Not using the HTML5 main element due to only partial support in IE11 -->
+		<div class="main">
 			<section class="hole hole-1">
 				<img class="hog hog-1 hide" src="./src/img/groundhog.svg" alt="picture of ground hog">
 			</section>
@@ -39,7 +43,10 @@
 			<section class="hole hole-9">
 				<img class="hog hog-9 hide" src="./src/img/groundhog.svg" alt="picture of a ground hog">
 			</section>
-		</main>
+		</div>
+		<footer>
+			<p id="js-footer"></p> 
+		</footer>
 	</div>
 	<script src="src/index.js"></script>
 </body>
