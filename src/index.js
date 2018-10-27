@@ -4,7 +4,7 @@ import './styles/scss/index.scss';
   // global variables (scoped within IIFE closure)
   let isGameOver = true;
   let score = 0;
-  let numberOfHogs = 0;
+  let numberOfmoles = 0;
   let gameClock;
   let activeTimeout;
   const difficultyLevelMap = { 0: { high: 3500, low: 400 }, 1: { high: 2000, low: 400 }, 2: {high: 1000, low: 400 }, 3: { high: 850, low: 100 }};
@@ -21,52 +21,52 @@ import './styles/scss/index.scss';
   const generateRandomNumberBetween1and9 = () => Math.floor(Math.random() * 9) + 1;
   const resetStats = () => {
     score = 0;
-    numberOfHogs = 0;
+    numberOfmoles = 0;
   };
   // sets game duration
   const setGameClock = () => {
     gameClock = setTimeout(() => {
       isGameOver = true;
-      hideAllHogs();
+      hideAllmoles();
       displayNotification();
     }, 15000);
   };
 
-  const hideAllHogs = () => {
-    document.querySelectorAll('.hog').forEach((hog) => { hideHog(hog) });
+  const hideAllmoles = () => {
+    document.querySelectorAll('.mole').forEach((mole) => { hidemole(mole) });
   }
 
   // displays game stats
   const displayStats = () => {
-    document.getElementById('js-score').innerHTML = `You've wacked ${score} out of ${numberOfHogs} ground hogs!`;
+    document.getElementById('js-score').innerHTML = `You've whacked ${score} out of ${numberOfmoles} moles!`;
   };
 
   // Functions for starting game
-  const getRandomHog = () => {
-    return document.querySelector(`.hog-${generateRandomNumberBetween1and9()}`);
+  const getRandommole = () => {
+    return document.querySelector(`.mole-${generateRandomNumberBetween1and9()}`);
   }
-  const showHog = (hog) => {
-    numberOfHogs++;
+  const showmole = (mole) => {
+    numberOfmoles++;
     displayStats();
-    hog.classList.contains('hide') ? hog.classList.remove('hide') : null;
+    mole.classList.contains('hide') ? mole.classList.remove('hide') : null;
   }
 
-  const hideHog = (hog) => {
-    hog.classList.contains('hide') ? null : hog.classList.add('hide');
+  const hidemole = (mole) => {
+    mole.classList.contains('hide') ? null : mole.classList.add('hide');
   }
 
-  const hideHogAndSetNewHog = (hog) => {
-    console.log('hideHogAndSetNewHog: ', hog);
-    hideHog(hog);
-    showRandomHogAndSetRandomHideTimeout();
+  const hidemoleAndSetNewmole = (mole) => {
+    console.log('hidemoleAndSetNewmole: ', mole);
+    hidemole(mole);
+    showRandommoleAndSetRandomHideTimeout();
   }
 
-  const showRandomHogAndSetRandomHideTimeout = () => {
-    // if game is not over -- (A) show random hog, (B) set the random hide hog time out, (C) increment hog counter, (D) display new stats
+  const showRandommoleAndSetRandomHideTimeout = () => {
+    // if game is not over -- (A) show random mole, (B) set the random hide mole time out, (C) increment mole counter, (D) display new stats
     if (!isGameOver) {
-      const hog = getRandomHog();
-      showHog(hog);
-      activeTimeout = setTimeout(hideHogAndSetNewHog.bind(this, hog), getRandomTimeoutDuration());
+      const mole = getRandommole();
+      showmole(mole);
+      activeTimeout = setTimeout(hidemoleAndSetNewmole.bind(this, mole), getRandomTimeoutDuration());
     }
   };
 
@@ -87,7 +87,7 @@ import './styles/scss/index.scss';
       setGameClock();
       resetStats();
       displayStats();
-      showRandomHogAndSetRandomHideTimeout();
+      showRandommoleAndSetRandomHideTimeout();
     }
   };
   const endGame = (message = "Game Over!") => {
@@ -95,7 +95,7 @@ import './styles/scss/index.scss';
       isGameOver = true;
       clearTimeout(activeTimeout);
       clearTimeout(gameClock);
-      hideAllHogs();
+      hideAllmoles();
       displayNotification(message);
       resetStats();
       displayStats();
@@ -108,9 +108,9 @@ import './styles/scss/index.scss';
     displayStats();
     startGame();
   };
-  const onHogWack = (hog) => {
-    console.log('hog was clicked');
-    hideHog(hog);
+  const onmoleWack = (mole) => {
+    console.log('mole was clicked');
+    hidemole(mole);
     score++;
     displayStats();
   };
@@ -119,7 +119,7 @@ import './styles/scss/index.scss';
   document.querySelector('.start').addEventListener('click', startGame);
   document.querySelector(".stop").addEventListener("click", endGame.bind(this, 'Ending your game!'));
   document.querySelector(".reset").addEventListener("click", resetGame)
-  document.querySelectorAll('img').forEach((hog) => { hog.addEventListener('click', onHogWack.bind(this, hog)) });
+  document.querySelectorAll('img').forEach((mole) => { mole.addEventListener('click', onmoleWack.bind(this, mole)) });
 
   // Show score
   displayStats();
