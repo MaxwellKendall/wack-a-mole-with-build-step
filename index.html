@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div id="app">
-		<aside>
+		<header>
 			<label for="difficulty">Difficulty Level
 				<select name="difficulty-level" id="difficulty">
 					<option value="0" selected disabled hidden>Select Difficulty Level</option>
@@ -15,10 +15,12 @@
 					<option value="3">Legendary</option>
 				</select>
 			</label>
-			<button class="start">Start</button>
-			<button class="stop">Stop</button>
-			<button class="reset">Reset</button>
-		</aside>
+			<div class="game-controls">
+				<button class="start">Start</button>
+				<button class="stop">Stop</button>
+				<button class="reset">Reset</button>
+			</div>
+		</header>
 		<!-- Not using the HTML5 main element due to only partial support in IE11 -->
 		<div class="main">
 			<h1 id="js-score"></h1>

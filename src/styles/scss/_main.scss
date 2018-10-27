@@ -17,14 +17,20 @@
     width: 33%;
     max-width: 250px;
     border: 0.25rem solid saddlebrown;
-    margin: 1rem;
+    margin: $global-spacer / 8;
     border-radius: 50%;
     overflow: hidden;
     background: saddlebrown;
+    @include bp($tablet) {
+      margin: $global-spacer / 2;
+    }
     img {
-      width: 140px;
+      width: 120px;
       position: relative;
       transition: cubic-bezier(0,1.76,.63,1.97);
+      @include bp($tablet) {
+        width: 140px;
+      }
     }
     .hide {
       top: 10rem;

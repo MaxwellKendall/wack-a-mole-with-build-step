@@ -1,0 +1,74 @@
+header {
+  @include flex-box-center(column);
+  margin-top: $global-spacer;
+  flex-wrap: wrap;
+  min-height: 23vh;
+  width: 100%;
+  // difficulty-level selector
+  label {
+    @include flex-box-center(row);
+    width: 100%;
+    text-transform: uppercase;
+    font-size: $regular-font;
+    font-weight: bold;
+    margin-bottom: $global-spacer;
+    select {
+      @extend %light-box-shadow;
+      height: 3rem;
+      -webkit-appearance: none;
+      background: white;
+      border-color: $border-color;
+      margin-left: auto;
+      width: 75%;
+      text-indent: 1rem;
+      color: $text-color;
+      font-size: $regular-font;
+      &:focus {
+        border: none;
+        background: gainsboro;
+        outline: none;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .game-controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @include bp($tablet) {
+      flex-direction: row;
+    }
+    button {
+      @extend %light-box-shadow;
+      width: 100%;
+      margin: $global-spacer / 8;
+      cursor: pointer;
+      height: 5rem;
+      border-radius: 4px;
+      font-size: $regular-font;
+      color: $text-color;
+      background-color: #fff;
+      border-color: $border-color;
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      text-transform: uppercase;
+      font-weight: normal;
+      &:hover {
+        border-color: #40a9ff;
+        font-weight: bold;
+        color: #40a9ff;
+      }
+    }
+    .start {
+      // background: green;
+    }
+    .reset {
+      // background: yellow;
+    }
+    .stop {
+      // background: red;
+    }
+  }
+}
+  
