@@ -21,7 +21,7 @@
     border-radius: 50%;
     overflow: hidden;
     background: saddlebrown;
-    @include bp($tablet) {
+    @include bp($desktop) {
       margin: $global-spacer / 2;
     }
     img {
@@ -33,7 +33,7 @@
         cursor: pointer;
         flex-grow: .2;
       }
-      @include bp($tablet) {
+      @include bp($desktop) {
         width: 140px;
       }
     }

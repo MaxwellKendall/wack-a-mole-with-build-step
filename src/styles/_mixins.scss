@@ -7,16 +7,24 @@
 
 @mixin bp($point) {
   @if $point == $mobile {
-    @media (min-width: $mobile ) { @content; }
+    @media screen and (min-width: $mobile) {
+      @content;
+    }
   }
   @if $point == $tablet {
-    @media (min-width: $tablet ) { @content; }
+    @media screen and (min-width: $tablet) {
+      @content;
+    }
   }
   @if $point == $desktop {
-    @media (min-width: $desktop ) { @content; }
+    @media screen and (min-width: $desktop) {
+      @content;
+    }
   }
   @if $point == $monitor {
-    @media (min-width: $monitor ) { @content; }
+    @media screen and (min-width: $monitor) {
+      @content;
+    }
   }
 }
 
