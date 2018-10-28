@@ -1,7 +1,9 @@
 // container for game 
 .main {
   @include flex-box-center(column);
-  min-height: 65vh;
+  @include bp($desktop) {
+    min-height: 65vh;
+  }
   flex-wrap: wrap;
   width: 100%;
   #score {
