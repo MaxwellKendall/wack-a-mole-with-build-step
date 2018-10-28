@@ -7,5 +7,5 @@ The site is live at https://maxwellkendall.github.io/wack-a-mole-with-build-step
 Those seeking to run this project locally can successfully do so by following these steps:
 
   1. Clone this repo
-  2. CD into the root, execute `yarn`, `yarn install` or `npm i` to download the dependencies
+  2. `cd` into the root, execute `yarn`, `yarn install` or `npm i` to download the dependencies -- `parcel` and `sass`
   3. Execute `yarn start` at the project root and the app will run at `localhost:1234`
