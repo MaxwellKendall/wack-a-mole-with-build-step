@@ -1,6 +1,6 @@
 # wack-a-mole-with-build-step
 
-This project is done completely in vanilla JS usint ES6 and SASS. This is accomplished by using parcel as a build step, which compiles ES6 to ES5 and SASS to CSS at build time.
+This project is done completely in vanilla JS using ES6 and SASS. This is accomplished by using parcel as a build step, which compiles ES6 to ES5 and SASS to CSS at build time.
 
 The site is live at https://maxwellkendall.github.io/wack-a-mole-with-build-step/ and works consistently on mobile, tablet, and desktop in all modern browsers down to Internet Explorer 11.
 
