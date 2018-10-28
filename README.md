@@ -5,5 +5,5 @@ This project is done completely in vanilla JS in ES6, using parcel as a build st
 The site is live at https://maxwellkendall.github.io/wack-a-mole-with-build-step/ but can be run locally by doing the following:
 
 1. Clone this repo
-2. CD into the root, execute 'yarn', 'yarn install' or `npm i` to download the two build dependencies -- parcel and SASS
-3. execute yarn start and the app will run at `localhost:1234`
+2. CD into the root, execute `yarn`, `yarn install` or `npm i` to download the dependencies
+3. Execute `yarn start` at the project root and the app will run at `localhost:1234`
