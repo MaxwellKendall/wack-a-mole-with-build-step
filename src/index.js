@@ -7,7 +7,7 @@
 * III. JavaScript Timeouts -- implemented to hide the randomly selected node if they are not otherwise hidden by a user click
  */
 
-import './styles/scss/index.scss';
+import './styles/index.scss';
 
 (() => {
   // global variables (scoped within IIFE closure)
