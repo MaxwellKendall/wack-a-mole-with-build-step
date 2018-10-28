@@ -187,7 +187,7 @@ var _this = void 0;
   // global variables (scoped within IIFE closure)
   var isGameOver = true;
   var score = 0;
-  var numberOfmoles = 0;
+  var numberOfMoles = 0;
   var gameClock;
   var activeTimeout;
   var difficultyLevelMap = {
@@ -207,19 +207,23 @@ var _this = void 0;
       high: 850,
       low: 100
     }
-  };
+  }; // general utility functions
 
   var getDifficultyLevel = function getDifficultyLevel() {
     return document.getElementById('difficulty').value;
   };
 
-  var getRandomTimeoutDuration = function getRandomTimeoutDuration() {
-    var _difficultyLevelMap$g = difficultyLevelMap[getDifficultyLevel()],
-        low = _difficultyLevelMap$g.low,
-        high = _difficultyLevelMap$g.high;
-    return Math.floor(Math.random() * high) + low;
-  }; // ensures a range between 9 and 1
+  var getDifficultyLevelNumbers = function getDifficultyLevelNumbers() {
+    return difficultyLevelMap[getDifficultyLevel()];
+  };
 
+  var getRandomTimeoutDurationBasedOnDifficultyLevel = function getRandomTimeoutDurationBasedOnDifficultyLevel() {
+    var _getDifficultyLevelNu = getDifficultyLevelNumbers(),
+        low = _getDifficultyLevelNu.low,
+        high = _getDifficultyLevelNu.high;
+
+    return Math.floor(Math.random() * high) + low;
+  };
 
   var generateRandomNumberBetween1and9 = function generateRandomNumberBetween1and9() {
     return Math.floor(Math.random() * 9) + 1;
@@ -227,68 +231,79 @@ var _this = void 0;
 
   var resetStats = function resetStats() {
     score = 0;
-    numberOfmoles = 0;
+    numberOfMoles = 0;
   }; // sets game duration
 
 
   var setGameClock = function setGameClock() {
     gameClock = setTimeout(function () {
       isGameOver = true;
-      hideAllmoles();
+      hideAllMoles();
       displayNotification();
     }, 15000);
-  };
+  }; // hides all moles
 
-  var hideAllmoles = function hideAllmoles() {
+
+  var hideAllMoles = function hideAllMoles() {
     document.querySelectorAll('.mole').forEach(function (mole) {
-      hidemole(mole);
+      hideMole(mole);
     });
   }; // displays game stats
 
 
   var displayStats = function displayStats() {
-    document.getElementById('js-score').innerHTML = "You've whacked ".concat(score, " out of ").concat(numberOfmoles, " moles!");
-  }; // Functions for starting game
+    document.getElementById('js-score').innerHTML = "You've whacked ".concat(score, " out of ").concat(numberOfMoles, " moles!");
+  }; // returns a random mole
 
 
-  var getRandommole = function getRandommole() {
+  var getRandomMole = function getRandomMole() {
     return document.querySelector(".mole-".concat(generateRandomNumberBetween1and9()));
-  };
+  }; // shows a mole
 
-  var showmole = function showmole(mole) {
-    numberOfmoles++;
+
+  var showMole = function showMole(mole) {
+    numberOfMoles++;
     displayStats();
     mole.classList.contains('hide') ? mole.classList.remove('hide') : null;
-  };
+  }; // hides a mole
 
-  var hidemole = function hidemole(mole) {
+
+  var hideMole = function hideMole(mole) {
     mole.classList.contains('hide') ? null : mole.classList.add('hide');
-  };
+  }; // Hides current mole and chooses/shows the next
 
-  var hidemoleAndSetNewmole = function hidemoleAndSetNewmole(mole) {
-    hidemole(mole);
-    showRandommoleAndSetRandomHideTimeout();
-  };
 
-  var showRandommoleAndSetRandomHideTimeout = function showRandommoleAndSetRandomHideTimeout() {
-    // if game is not over -- (A) show random mole, (B) set the random hide mole time out, (C) increment mole counter, (D) display new stats
+  var hideMoleAndSetNewMole = function hideMoleAndSetNewMole(mole) {
+    hideMole(mole);
+    showRandomMoleAndSetRandomHideTimeout();
+  }; // shows random mole and sets time out to hide it
+
+
+  var showRandomMoleAndSetRandomHideTimeout = function showRandomMoleAndSetRandomHideTimeout() {
     if (!isGameOver) {
-      var mole = getRandommole();
-      showmole(mole);
-      activeTimeout = setTimeout(hidemoleAndSetNewmole.bind(_this, mole), getRandomTimeoutDuration());
+      var mole = getRandomMole();
+      showMole(mole);
+      activeTimeout = setTimeout(hideMoleAndSetNewMole.bind(_this, mole), getRandomTimeoutDurationBasedOnDifficultyLevel());
     }
-  }; // functions for end a game
+  };
+  /**
+   * @param {message} message the string to display to the user
+   * @returns {Promise} promise that resolves when the notification is removed
+   */
 
 
   var displayNotification = function displayNotification() {
-    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Game Over!';
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Game over!";
     var gameNotification = document.getElementById('js-game-notification');
     gameNotification.classList.add('notification__open');
     gameNotification.innerHTML = message;
-    setTimeout(function () {
-      gameNotification.classList.remove('notification__open');
-    }, 1500);
-  }; // game controls
+    return new Promise(function (resolve) {
+      setTimeout(function () {
+        gameNotification.classList.remove('notification__open');
+        resolve('notification has been removed');
+      }, 1500);
+    });
+  }; // Functions which compose together the functions above
 
 
   var startGame = function startGame() {
@@ -297,19 +312,20 @@ var _this = void 0;
       setGameClock();
       resetStats();
       displayStats();
-      displayNotification('Starting a new game!');
-      showRandommoleAndSetRandomHideTimeout();
+      displayNotification("Starting a new game!").then(function () {
+        showRandomMoleAndSetRandomHideTimeout();
+      });
     }
   };
 
   var endGame = function endGame() {
-    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Game Over!";
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Game Over!';
 
     if (!isGameOver) {
       isGameOver = true;
       clearTimeout(activeTimeout);
       clearTimeout(gameClock);
-      hideAllmoles();
+      hideAllMoles();
       displayNotification(message);
       resetStats();
       displayStats();
@@ -318,29 +334,29 @@ var _this = void 0;
 
   var resetGame = function resetGame() {
     clearTimeout(activeTimeout);
-    endGame('Resetting your game...');
+    endGame('Resetting game...');
     resetStats();
     displayStats();
     startGame();
   };
 
-  var onMoleWack = function onMoleWack(mole) {
-    hidemole(mole);
+  var onMoleWhack = function onMoleWhack(mole) {
+    hideMole(mole);
     score++;
     displayStats();
   }; // Event listeners
 
 
   document.querySelector('.start').addEventListener('click', startGame);
-  document.querySelector(".stop").addEventListener("click", endGame.bind(_this, 'Ending your game!'));
-  document.querySelector(".reset").addEventListener("click", resetGame);
-  document.querySelectorAll('img').forEach(function (mole) {
-    mole.addEventListener('click', onMoleWack.bind(_this, mole));
+  document.querySelector('.stop').addEventListener('click', endGame.bind(_this, 'Game has been stopped!'));
+  document.querySelector('.reset').addEventListener('click', resetGame);
+  document.querySelectorAll('.mole').forEach(function (mole) {
+    mole.addEventListener('click', onMoleWhack.bind(_this, mole));
   }); // Show score
 
   displayStats(); // display footer
 
-  document.getElementById("js-footer").innerHTML = "Maxwell Kendall &#169 ".concat(new Date().getFullYear());
+  document.getElementById('js-footer').innerHTML = "Maxwell Kendall &#169 ".concat(new Date().getFullYear());
 })();
 },{"./styles/scss/index.scss":"src/styles/scss/index.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -369,7 +385,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61318" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64708" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
