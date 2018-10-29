@@ -103,10 +103,9 @@ import './styles/index.scss';
       setGameClock();
       resetStats();
       displayStats();
-      displayNotificationToast(`Starting a new game!`)
-        .then(() => {
-          setTimeout(showRandomMoleAndSetRandomHideTimeout, 1000);
-        });
+      displayNotificationToast(`Starting a new game!`).then(() => {
+        setTimeout(showRandomMoleAndSetRandomHideTimeout, 1000);
+      });
     }
   };
 
@@ -123,7 +122,6 @@ import './styles/index.scss';
   };
 
   const resetGame = () => {
-    clearTimeout(activeTimeout);
     endGame('Resetting game...');
     resetStats();
     displayStats();
