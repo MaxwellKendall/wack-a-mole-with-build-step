@@ -23,9 +23,7 @@ import './styles/index.scss';
   const getDifficultyLevelNumbers = () => difficultyLevelMap[getDifficultyLevel()];
   const getRandomTimeoutDurationBasedOnDifficultyLevel = () => {
     const { low, high } = getDifficultyLevelNumbers();
-    const rtrn = Math.floor(Math.random() * high) + low;
-    console.log('random #: ', rtrn);
-    return rtrn;
+    return Math.floor(Math.random() * high) + low;
   }
   const generateRandomNumberBetween1and9 = () => Math.floor(Math.random() * 9) + 1;
   const resetStats = () => { score = 0; numberOfMoles = 0; };
@@ -35,9 +33,10 @@ import './styles/index.scss';
     gameClock = setTimeout(() => {
       isGameOver = true;
       hideAllMoles();
-      displayNotification();
-    }, 15000);
+      displayNotificationToast();
+    }, 16000); // 15s game, adding an extra 1s to account for notification toast
   };
+  
   // hides all moles
   const hideAllMoles = () => {
     document.querySelectorAll('.mole').forEach((mole) => { hideMole(mole) });
@@ -82,9 +81,9 @@ import './styles/index.scss';
 
   /**
    * @param {message} message the string to display to the user
-   * @returns {Promise} promise that resolves when the notification is removed
+   * @returns {Promise} a promise that resolves when the notification has been removed
    */
-  const displayNotification = (message = `Game over!`) => {
+  const displayNotificationToast = (message = `Game over!`) => {
     const gameNotification = document.getElementById('js-game-notification');
     gameNotification.classList.add('notification__open');
     gameNotification.innerHTML = message;
@@ -104,9 +103,9 @@ import './styles/index.scss';
       setGameClock();
       resetStats();
       displayStats();
-      displayNotification(`Starting a new game!`)
+      displayNotificationToast(`Starting a new game!`)
         .then(() => {
-          showRandomMoleAndSetRandomHideTimeout();
+          setTimeout(showRandomMoleAndSetRandomHideTimeout, 1000);
         });
     }
   };
@@ -117,7 +116,7 @@ import './styles/index.scss';
       clearTimeout(activeTimeout);
       clearTimeout(gameClock);
       hideAllMoles();
-      displayNotification(message);
+      displayNotificationToast(message);
       resetStats();
       displayStats();
     }
