@@ -1,16 +1,28 @@
 .notification {
   @include flex-box-center(row);
-  @include smoothTransition(all, 1s);
   @extend %background-styles;
+  @include smoothTransition(opacity, .5s);
   font-size: $regular-font;
   padding: $global-spacer;
   position: fixed;
-  top: -6rem;
-  width: 100%;
+  background: #fff3cd;
+  color: #856404;
+  border-color: #ffeeba;
   border-radius: .25rem;
-  width: 100%;
+  opacity: 0;
+  width: 75%;
+  top: 50vh;
+  @include bp($desktop) {
+    top: -6rem;
+    opacity: 1;
+    width: 100%;
+    @include smoothTransition(top, .1s);
+  }
 }
 
 body .notification__open {
-  top: -0.25rem;
+  opacity: 1;
+  @include bp($desktop) {
+    top: 0vh;
+  }
 }
