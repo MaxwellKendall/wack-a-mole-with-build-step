@@ -16,14 +16,16 @@ import './styles/index.scss';
   let numberOfMoles = 0;
   let gameClock;
   let activeTimeout;
-  const difficultyLevelMap = { 0: { high: 3500, low: 400 }, 1: { high: 2000, low: 400 }, 2: {high: 1000, low: 400 }, 3: { high: 850, low: 100 }};
+  const difficultyLevelMap = { 0: { high: 3500, low: 1500 }, 1: { high: 3000, low: 1000 }, 2: { high: 2000, low: 1000 }, 3: { high: 1000, low: 500 }};
   
   // general utility functions
   const getDifficultyLevel = () => document.getElementById('difficulty').value;
   const getDifficultyLevelNumbers = () => difficultyLevelMap[getDifficultyLevel()];
   const getRandomTimeoutDurationBasedOnDifficultyLevel = () => {
     const { low, high } = getDifficultyLevelNumbers();
-    return Math.floor(Math.random() * high) + low;
+    const rtrn = Math.floor(Math.random() * high) + low;
+    console.log('random #: ', rtrn);
+    return rtrn;
   }
   const generateRandomNumberBetween1and9 = () => Math.floor(Math.random() * 9) + 1;
   const resetStats = () => { score = 0; numberOfMoles = 0; };
